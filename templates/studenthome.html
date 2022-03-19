@@ -1,0 +1,200 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" type="text/css" href="{% static "css/calc.css" %}">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+  			integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  			crossorigin="anonymous">
+  	</script>
+    <title>Student Dashboard</title>
+  </head>
+  <body>
+    <div class="col-lg-12">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12">
+    <div class="row">
+    <div class="col-lg-12 text-center mt-5">
+        <div class="card-header">
+            <span class="mb-0 text-muted">
+                <h2 align="center">Student Dashboard</h2>
+            </span>
+        </div><br>
+    <div class="col-sm" align="right">
+      <a class="btn btn-info" href="{% url 'logout_view' %}" role="button">Logout</a>
+    </div><br>
+    </div>
+    </div>
+    </div>
+  <tbody class="tlistdata">
+  </tbody>
+</table>
+
+{% for i in details %}
+<div class="card text-center">
+    <div class="card-header">
+        <span class="mb-0 text-muted">
+            <h2 align="center">Student Report Card</h2>
+        </span>
+    </div>
+    <div class="card-body">
+      <h4 class="card-title" align="left">Name : {{ i.name }}</h4>
+      <span class="mb-0 text-muted">
+      <h5 class="card-title" align="left">Semester : 1</h5>
+    </span>
+      <hr>
+      <table class="table table-hover" style="width:600px; height:300px; overflow-y:scroll; border-bottom:2px blue solid;">
+        <thead>
+          <tr>
+            <th scope="col">Courses</th>
+            <th scope="col">Mark</th>
+          </tr>
+        </thead>
+        <tbody class="tlistdata">
+          <tr align="left">
+            <td>Subject 1</td>
+            <td>{{i.subject1}}</td>
+        </tr>
+        <tr align="left">
+            <td>Subject 2</td>
+            <td>{{i.subject2}}</td>
+        </tr>
+        <tr align="left">
+            <td>Subject 3</td>
+            <td>{{i.subject3}}</td>
+        <tr></tr>
+        <tr></tr>
+        </tbody>
+      </table>
+      <div class="card-body">
+      <p class="card-text" style="font-size: 16px;" align="right">Total Marks : NA</p>
+      <p class="card-text" style="font-size: 16px;" align="right">CGPA : {{i.cgpa}}%</p><hr></div>
+      <a class="btn btn-primary" href="#" role="button" onclick="confirm('Download option coming soon!!!')">Download</a>
+    </div>
+  </div>
+  {% endfor %}
+
+  <!-- Calculator -->
+
+
+<div class="col-sm" align="right">
+    <div class="card text-center">
+        <div class="card-header">
+            <span class="mb-0 text-muted">
+                <h2 align="center">Calculator</h2>
+            </span>
+        </div><br>
+    <textarea id="resultArea" readonly rows="3" cols="21"></textarea>
+
+    <table>
+        <tr>
+            <td></td>
+            <td><button id="cgpa" class="btn btn-default">%</button></td>
+<!--				<td></td>-->
+            <td><button id="clrTxt" class="btn btn-danger">C</button></td>
+            <td><button id="del" class="btn btn-default">&#9746;</button></td>
+        </tr>
+
+        <tr>
+            <td><button id="num7" class="btn btn-default">7</button></td>
+            <td><button id="num8" class="btn btn-default">8</button></td>
+            <td><button id="num9" class="btn btn-default">9</button></td>
+            <td><button id="op3" class="btn btn-default">&div;</button></td>
+        </tr>
+
+        <tr>
+            <td><button id="num4" class="btn btn-default">4</button></td>
+            <td><button id="num5" class="btn btn-default">5</button></td>
+            <td><button id="num6" class="btn btn-default">6</button></td>
+            <td><button id="op2" class="btn btn-default">&times;</button></td>
+        </tr>
+
+        <tr>
+            <td><button id="num1" class="btn btn-default">1</button></td>
+            <td><button id="num2" class="btn btn-default">2</button></td>
+            <td><button id="num3" class="btn btn-default">3</button></td>
+            <td><button id="op1" class="btn btn-default">&minus;</button></td>
+        </tr>
+
+        <tr>
+            <td><button id="decp" class="btn btn-default">.</button></td>
+            <td><button id="num0" class="btn btn-default">0</button></td>
+            <td><button id="eq" class="btn btn-default">=</button></td>
+            <td><button id="op0" class="btn btn-default">&plus;</button></td>
+        </tr>
+    </table><br><br>
+</div>
+<script type="text/javascript" src="{% static "js/calc.js" %}"></script>
+</div>
+</div>
+
+
+
+
+
+<nav aria-label="Page navigation example text-center">
+{% if studs.has_other_pages %}
+  <ul class="pagination">
+    {% if studs.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{ studs.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
+    {% endif %}
+    {% for i in studs.paginator.page_range %}
+      {% if studs.number == i %}
+        <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if studs.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ studs.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="page-item disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+</nav> 
+    </div>
+    </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+ const search = document.querySelector('.form-control');
+ const list = document.querySelector('.tlistdata');
+      const searchFunc= (term) =>{
+Array.from(list.children)
+    .filter((todo)=> !todo.textContent.toLowerCase().includes(term))
+        .forEach(todo=>{
+            todo.classList.add('filtered');
+        })
+Array.from(list.children)
+    .filter((todo)=> todo.textContent.toLowerCase().includes(term))
+        .forEach(todo=>{
+            todo.classList.remove('filtered');
+        })
+};
+      search.addEventListener('keyup',()=>{
+      const term =search.value.toLowerCase();
+      searchFunc(term);
+      })
+    </script>
+    <style>
+      .filtered{
+        display: none !important;
+      }
+    </style>
+  </body>
+</html>
