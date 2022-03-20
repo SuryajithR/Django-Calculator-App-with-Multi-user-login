@@ -4,11 +4,11 @@ from django.db import models
 class teacher(models.Model):
 
     name = models.CharField(max_length=500, verbose_name='Student Name')
-    rno = models.IntegerField(null=True, blank=True,)
+    rno = models.IntegerField(null=True, blank=True, verbose_name='Register No')
     subject1 = models.IntegerField(null=True, blank=True,)
     subject2 = models.IntegerField(null=True, blank=True,)
     subject3 = models.IntegerField(null=True, blank=True,)
-    cgpa = models.IntegerField(verbose_name='Percentage')
+    cgpa = models.IntegerField(verbose_name='CGPA')
 
     def __str__(self):
         return self.name
