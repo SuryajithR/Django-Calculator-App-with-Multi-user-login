@@ -31,9 +31,6 @@ def login_view(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
-            # if user is not None and user.is_admin:
-            #     login(request, user)
-            #     return redirect('adminpage')
             if user is not None and user.is_student:
                 login(request, user)
                 return redirect('student') #student page
