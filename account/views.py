@@ -52,6 +52,3 @@ def logout_view(request):
 def home(request):
     return render(request,'home.html')
 
-
-# def student(request):
-#     return render(request,'home.html')
