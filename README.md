@@ -11,7 +11,7 @@ Django Calculator App with Multi user login
 4. Git Commit -m Command
 5. Git Push -u Command
 
-## 1. Clone this Repository, PollME
+## 1. Clone this Repository,
 To clone this repository open your command prompt / terminal, and type
 ```
 git clone https://github.com/SuryajithR/Django-Calculator-App-with-Multi-user-login
